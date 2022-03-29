@@ -1,7 +1,6 @@
-package com.sparta.springcore.controller;
+package com.sparta.justboard.controller;
 
-import com.sparta.springcore.model.UserRoleEnum;
-import com.sparta.springcore.security.UserDetailsImpl;
+import com.sparta.justboard.security.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/")
     public String home(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        model.addAttribute("username", userDetails.getUsername());
 
-        if(userDetails.getUser().getRole() == UserRoleEnum.ADMIN) {
-            model.addAttribute("admin_role", true);
+        if(userDetails == null){
+            model.addAttribute("user","null");
+        }else{
+            model.addAttribute("user",userDetails.getUser().getUsername());
         }
         return "index";
     }

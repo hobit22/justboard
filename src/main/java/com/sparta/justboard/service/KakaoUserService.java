@@ -1,13 +1,12 @@
-package com.sparta.springcore.service;
+package com.sparta.justboard.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.springcore.dto.KakaoUserInfoDto;
-import com.sparta.springcore.model.User;
-import com.sparta.springcore.model.UserRoleEnum;
-import com.sparta.springcore.repository.UserRepository;
-import com.sparta.springcore.security.UserDetailsImpl;
+import com.sparta.justboard.dto.KakaoUserInfoDto;
+import com.sparta.justboard.model.User;
+import com.sparta.justboard.repository.UserRepository;
+import com.sparta.justboard.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -135,10 +134,8 @@ public class KakaoUserService {
 
                 // email: kakao email
                 String email = kakaoUserInfo.getEmail();
-                // role: 일반 사용자
-                UserRoleEnum role = UserRoleEnum.USER;
 
-                kakaoUser = new User(nickname, encodedPassword, email, role, kakaoId);
+                kakaoUser = new User(nickname, encodedPassword, email, kakaoId);
             }
 
             userRepository.save(kakaoUser);

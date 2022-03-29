@@ -1,4 +1,4 @@
-package com.sparta.springcore.dto;
+package com.sparta.justboard.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

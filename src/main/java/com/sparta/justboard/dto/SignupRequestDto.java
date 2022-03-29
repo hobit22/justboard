@@ -1,4 +1,4 @@
-package com.sparta.springcore.dto;
+package com.sparta.justboard.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,7 @@ import lombok.Setter;
 public class SignupRequestDto {
     private String username;
     private String password;
+    private String password2;
     private String email;
     private boolean admin = false;
     private String adminToken = "";
