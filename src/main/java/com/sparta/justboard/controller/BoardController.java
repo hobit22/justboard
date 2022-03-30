@@ -8,7 +8,6 @@ import com.sparta.justboard.repository.BoardRepository;
 import com.sparta.justboard.repository.CommentRepository;
 import com.sparta.justboard.security.UserDetailsImpl;
 import com.sparta.justboard.service.BoardService;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -67,6 +66,22 @@ public class BoardController {
         return "detail";
     }
 
+    @RequestMapping(value="/api/board/{id}", method=RequestMethod.DELETE)
+    public String deleteBoard(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        Board board = boardRepository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("잘못된 접근입니다.")
+        );
+        System.out.println("DELETE API BOARD ID");
+        System.out.println("userDetail = " + userDetails.getUser().getUsername());
+        System.out.println("board = " + board.getUser().getUsername());
+        if(userDetails.getUser().getId().equals(board.getUser().getId())){
+            System.out.println("ㅇㅇㅇㅋㅋㅋ");
+            boardRepository.deleteById(id);
+        }
+        return "redirect:/";
+    }
+
+
     @PostMapping("/api/board/{id}/comment")
     public String createComment(@PathVariable Long id, @ModelAttribute CommentRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
 
@@ -76,9 +91,12 @@ public class BoardController {
                 ()->new IllegalArgumentException("잘못된 접근입니다.")
         );
         if(userDetails == null){
-            return "redirect:/";
+            return "redirect:/api/board/{id}";
         }else{
             requestDto.setUser(userDetails.getUser());
+        }
+        if(requestDto.getText().isEmpty()){
+            return "redirect:/api/board/{id}";
         }
         Comment comment = new Comment(requestDto);
         comment.setBoard(board);
