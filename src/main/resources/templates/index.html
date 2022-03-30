@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<div class="nav" style="background: darkgray">
+<div class="nav" style="background: darkgray; height: 100px;">
     <h4 class="logo">
-        <a href="/" style="color: #ffffff;margin-left: 15px">Notice-Board</a>
+        <a href="/" style="color: #ffffff;margin-left: 15px">JUST BOARD</a>
         <span th:if="${user} != 'null'" th:text="${user}+'님 환영합니다.'" style="color: #ffffff;margin-left: 20px"></span>
         <a th:if="${user} == 'null'" id="login-text" href="/user/login"
            style="float: right;color: #ffffff;margin-right: 15px">
@@ -26,16 +26,12 @@
 <br>
 <br>
 <div class="container">
-
-    <center>
         <button class="btn btn-primary" onclick="location.href='/api/board'">글 작성</button>
-    </center>
     <br>
 
     <table class="table table-striped text-center">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">#</th>
             <th scope="col">제목</th>
             <th scope="col">사용자</th>
             <th scope="col">작성일자</th>
@@ -44,9 +40,7 @@
         <tbody>
         <div th:each="board : ${boardList}" class="table table-striped text-center">
             <tr>
-                <td></td>
-
-                <th scope="col"><a th:href="@{/api/board/}+${board.id}" th:text="${board.title}"> </a></th>
+                <th scope="col" style="width: 70%"><a th:href="@{/api/board/}+${board.id}" th:text="${board.title}"> </a></th>
                 <th scope="col" th:text="${board.user.username}"></th>
                 <th scope="col" th:text="${#temporals.format(board.modifiedAt, 'yyyy-MM-dd HH:mm')}"></th>
             </tr>

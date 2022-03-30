@@ -91,7 +91,7 @@ public class BoardController {
                 ()->new IllegalArgumentException("잘못된 접근입니다.")
         );
         if(userDetails == null){
-            return "redirect:/api/board/{id}";
+            return "redirect:/user/login";
         }else{
             requestDto.setUser(userDetails.getUser());
         }
