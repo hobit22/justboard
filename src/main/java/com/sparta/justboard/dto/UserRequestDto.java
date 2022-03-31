@@ -1,5 +1,6 @@
 package com.sparta.justboard.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserRequestDto {
 
     @NotBlank(message = "아이디를 입력해주세요")

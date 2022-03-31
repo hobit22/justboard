@@ -1,5 +1,7 @@
 package com.sparta.justboard.model;
 
+import com.sparta.justboard.dto.UserRequestDto;
+import com.sparta.justboard.validator.UserValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,5 +45,15 @@ public class User {
         this.password = password;
         this.email = email;
         this.kakaoId = kakaoId;
+    }
+
+    // 관심 상품 생성 시 이용합니다.
+    public User(UserRequestDto requestDto, Long userId) {
+        // 입력값 Validator
+        UserValidator.validateUserInput(requestDto, userId);
+        this.username = requestDto.getUsername();
+        this.password = requestDto.getPassword();
+        this.email = requestDto.getEmail();
+        this.kakaoId = requestDto.getKakaoId();
     }
 }

@@ -9,13 +9,12 @@ import org.springframework.validation.Errors;
 @RequiredArgsConstructor
 @Component
 public class CheckEmailValidator extends AbstractValidator<SignupRequestDto> {
-    private final UserRepository userRepository;
+    private static UserRepository userRepository;
 
     @Override
-    protected void doValidate(SignupRequestDto dto, Errors errors) {
+    public void doValidate(SignupRequestDto dto, Errors errors) {
         if (userRepository.existsByEmail(dto.getEmail())) {
             errors.rejectValue("email", "이메일 중복 오류", "이미 사용중인 이메일 입니다.");
         }
-
     }
 }
