@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sparta.justboard.dto.SignupRequestDto;
 import com.sparta.justboard.service.KakaoUserService;
 import com.sparta.justboard.service.UserService;
-import com.sparta.justboard.util.CheckEmailValidator;
 import com.sparta.justboard.util.CheckPasswordValidator;
 import com.sparta.justboard.util.CheckUsernameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +26,17 @@ public class UserController {
     private final KakaoUserService kakaoUserService;
     private final CheckUsernameValidator checkUsernameValidator;
     private final CheckPasswordValidator checkPasswordValidator;
-    private final CheckEmailValidator checkEmailValidator;
 
     @InitBinder
     public void validatorBinder(WebDataBinder binder) {
         binder.addValidators(checkUsernameValidator);
         binder.addValidators(checkPasswordValidator);
-        binder.addValidators(checkEmailValidator);
     }
 
     @Autowired
-    public UserController(UserService userService, KakaoUserService kakaoUserService, CheckUsernameValidator checkUsernameValidator, CheckEmailValidator checkEmailValidator, CheckPasswordValidator checkPasswordValidator) {
+    public UserController(UserService userService, KakaoUserService kakaoUserService, CheckUsernameValidator checkUsernameValidator, CheckPasswordValidator checkPasswordValidator) {
         this.userService = userService;
         this.kakaoUserService = kakaoUserService;
-        this.checkEmailValidator = checkEmailValidator;
         this.checkPasswordValidator = checkPasswordValidator;
         this.checkUsernameValidator = checkUsernameValidator;
     }

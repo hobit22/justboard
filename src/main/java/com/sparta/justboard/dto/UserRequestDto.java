@@ -26,7 +26,7 @@ public class UserRequestDto {
     @NotBlank(message = "비밀번호 확인을 입력해주세요")
     private String checkpw;
 
-    @NotBlank(message = "이메일을 입력해주세요")
+    @Pattern(regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", message="이메일 형식이 아닙니다.")
     @Email
     private String email;
 
